@@ -240,7 +240,7 @@ def run_finance_agent(user_query: str):
 
     for step in range(10):  # Max 10 ReAct steps
         response = client.chat.completions.create(
-            model="llama3-70b-8192",
+            model="llama-3.3-70b-versatile",
             messages=messages,
             tools=tool_schemas,
             tool_choice="auto",
@@ -256,7 +256,7 @@ def run_finance_agent(user_query: str):
 
         for tool_call in msg.tool_calls:
             func_name = tool_call.function.name
-            args = json.loads(tool_call.function.arguments)
+            args = json.loads(tool_call.function.arguments) or {}
             result = tool_functions[func_name](**args)
             messages.append({
                 "role": "tool",

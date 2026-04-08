@@ -168,7 +168,7 @@ def run_academic_agent(user_query: str):
 
     for step in range(10):
         response = client.chat.completions.create(
-            model="llama3-70b-8192",
+            model="llama-3.3-70b-versatile",
             messages=messages,
             tools=tool_schemas,
             tool_choice="auto",
